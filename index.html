@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="author" content="Michal Miotk & Kamil Orlow">
+  <meta name="author" content="Kemal Erdem">
 
   <title>Weapon Detection using Synthethic datasets</title>
 
@@ -18,7 +18,7 @@
 <div class="reveal">
   <div class="slides">
     <section>
-      <h2>Presentation</h2>
+      <h2>Weapons detection</h2>
       <small>Authors: Michał Miotk, Kamil Orłow</small>
     </section>
     <section>
@@ -103,27 +103,30 @@
         </section>
     </section>
     <section>
-      SynthDet
+      <h2>SynthDet</h2>
       <section>
-        Background - nalozone zdjecia na szesciany i walce, brak pelnych modeli
+          <h4>Background</h4>
       </section>
       <section>
-        Foreground - moga byc obiekty z backgroundu na foreground - ustawia sie procentowa szanse
+          <h4>Foreground</h4>
       </section>
       <section>
-        Occlusion - full implementation, ours is partial
+          <h4>Occlusion</h4>
       </section>
       <section>
-        Features - lights, blur, extra
+          <h4>Extra - lights, blur, noises, etc.</h4>
       </section>
+        <section>
+            <h4>Final result : LIVE</h4>
+        </section>
     </section>
     
     <section>
         <section>
-          <h1>ML - Datasets</h1>
+            <h2>ML - Datasets</h2>
         </section>
         <section>
-          <h2>1. EdgeAi Weapon Dataset</h2>
+          <h4>1. EdgeAi Weapon Dataset</h4>
           <section>
             <p align="center">
               <img src="images/edgeaidataset.png"/>
@@ -131,14 +134,16 @@
           </section>
         </section>
         <section>
-          <h2>2. Dataset Generated in Unity</h2>
+          <h4>2. Dataset Generated in Unity</h4>
           <small>Based on free models from assets store - some of them has three instances</small>
-          <table>
-            <tr>
-              <th width="25%"><img src="images/assetstore.png"/></th>
-              <th width="25%"><img src="images/dataset_generated_synthdet.png"/></th>
-            </tr>
-          </table>
+          <div class="row">
+            <div class="column">
+              <img src="images/assetstore.png" style="width:50%">
+            </div>
+            <div class="column">
+              <img src="images/dataset_generated_synthdet.png" style="width:50%">
+            </div>
+          </div>
         </section>
     </section>
     <section>
@@ -167,60 +172,49 @@
       </table> 
     </section>
     <section>
-      <img src="images/detectron2.png"/>
-      <p>Model configuration</p>
-      <table style="float:left">
+      <h1>Detectron2 configuration</h1>
+      <tabl style="float:center"e> 
         <tr>
-          <th>MODEL type</th>
-          <th>instance segmentation</th>
+          <td>MODEL.WEIGHTS</td>
+          <td>mask_rcnn_R_50_FPN_3x.yaml</td>
         </tr>
         <tr>
-          <th>MODEL.WEIGHTS</th>
-          <th>mask_rcnn_R_50_FPN_3x</th>
-        </tr>
-        <tr>
-          <th>MODEL.BACKBONE.FREEZE_AT</th>
-          <th>2</th>
+          <td>MODEL.BACKBONE.FREEZE_AT</td>
+          <td>2</td>
         </tr>
       </table>
     </section>
     <section>
       <section>
-        <h1>Training results</h1> 
+        <h1>Results</h1> 
         <img src="images/results/precision.png" style="width:50%"/>
       </section>
       <section>
         <h2>Precision on glock detection</h2>
-        <figure>
-          <img src="images/results/glock_precision.png" style="width:50%">
-          <figcaption>trained on dataset generated with SynthDet</figcaption>
-        </figure> 
+        <small>trained on datesetgenerated with SynthDet</small> 
+        <img src="images/results/glock_precision.png" style="width:50%"/>
       </section>
       <section>
-        <small>Results after training on Synthetic Gun Detection Dataset from Edgecase.ai</small>
+        <h3>Results after trained on weapons dataset from edgeai</h3>
         <iframe width="560" height="315" src="https://www.youtube.com/embed/FAx2lqds5Mg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </section>
       <section>
-        <p>Results are presented in streamlit app</p>
+        <h4>Results are presented in streamlit app</h4>
         <img src="images/results/streamlit.png" style="width:50%"/>
       </section>
     </section>
     <section>
-      <p>Perception package have no scripts to get COCO output</p>
+      <h2>It needs own script to parse output</h2>
       <table>
         <tr>
-          <td height="40%" width="40%"><img src="images/perception_output/text.png"/></td>
-          <td height="40%" width="40%"><img src="images/perception_output/segmentation.png"/></td>
+          <td height=400 width=400><img src="images/perception_output/text.png"/></td>
+          <td height=400 width=400><img src="images/perception_output/segmentation.png"/></td>
         </tr>
       </table>
     </section>
     <section>
-      <h2>AWS sagemaker was used to create test dataset</h2> 
-      <ul>
-        <li>maximum 10 labels</li>
-        <li>no instance segmentation - only semantic</li>
-        <li>own scripts to convert to coco</li>
-      </ul>
+      <h2>AWS sagemaker was used for test dataset</h2> 
+      <small>up to 10 labels, own scripts because no instance segmentation</small>
       <img src="images/labeling_aws.png" style="width:50%"/>
     </section>
     <section>
@@ -230,12 +224,13 @@
         <img src="images/3dbounding_box.png" style="width:50%"/>
       </section>
       <section>
-        scanning przestrzeni 3D
+          <h4>Scanning space 3D</h4>
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/mZcLKcyHWDs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </section>
     </section>
     <section>
       <section>
-        <h3>Sources</h3>    
+        <h3>Links</h3>    
         <ul>
           <li>https://github.com/Unity-Technologies/SynthDet</li>
           <li>https://github.com/Unity-Technologies/com.unity.perception</li>
@@ -251,13 +246,12 @@
         <li>https://github.com/michalmiotk/gun</li>
         <li>https://github.com/michalmiotk/WeaponDatasetCreator</li>
         <li>https://blog.usejournal.com/worlds-first-synthetic-gun-detection-dataset-from-edgecase-ai-dbe3ea8eeb7e</li>
-        <li>https://wandb.ai/</li>
       </ul> 
    </section>
-  </section>
-  <section>
-    <p>Questions ?</p>
-  </section>
+     <section>
+         <h2>Q&A</h2>
+     </section>
+    </section>
   </div>
 </div>
 <script src="dist/reveal.js"></script>
